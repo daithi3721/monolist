@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="container-inner inner-default clearfix">
+    <% @item_counts.each_with_index do |(item, count), rank| %>
+      <div class="item-box">
+        <div class="image">
+          <div class="img-wrap">
+            <% if item.large_image.present? %>
+              <%= image_tag(item.large_image , alt: item.title) %>
+            <% else %>
+              <%= image_tag("no-image.png" , alt: item.title) %>
+            <% end %>
+            <div class="ranking clearfix">
+              <button type="button" class="btn btn-danger disabled">第<%= rank + 1 %>位 (<%= count %>have)</button>
+            </div>
+          </div>
+        </div> 
+        <div class="detail">
+          <p class="title">
+            <%= item.title %>
+          </p>
+        </div>
+        <%= render 'items/action' , item: item if logged_in? %>
+      </div>
+    <% end %>
+  </div>
+</div>
